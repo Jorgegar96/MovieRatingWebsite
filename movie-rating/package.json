@@ -44,6 +44,8 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.6",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0"
   }

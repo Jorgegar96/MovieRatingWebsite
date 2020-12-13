@@ -1,32 +1,23 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
 
 export const Nav = () => {
     const navStyle = {
         color: 'white'
     };
     return(
-        <nav className="navbar navbar-light navbar-expand-lg bg-dark scrolling-navbar">
-            <h3 className="">Rate The Movie</h3>
-            <button 
-                className="navbar-toggler" 
-                type="button" 
-                data-toggle="collapse" 
-                data-target="#navbarSupportedContent" 
-                aria-controls="navbarSupportContent" 
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            >
+        <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+            <a href="#" className="navbar-brand">MovieRatings</a>
+            <button className="navbar-toggler" data-toggle="collapse" data-target="#navbarmenu">
                 <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse">
-                <ul className="navbar-nav mr-auto">
-                    <Link to='/About'>
-                        <li className="nav-item active">About</li>
-                    </Link>
-                    <Link to='/'>
-                        <li className="nav-item">Logout</li>
-                    </Link>
+            <div className="collapse navbar-collapse" id="navbarmenu">
+                <ul className="navbar-nav ml-auto">
+                    <li className="nav-item">
+                        <a href="/About" className="nav-link">About</a>
+                    </li>
+                    <li className="nav-item">
+                        <a href="#" className="nav-link">Logout</a>
+                    </li>
                 </ul>
             </div>
         </nav>

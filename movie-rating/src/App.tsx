@@ -11,8 +11,10 @@ function App() {
     <Router>
       <Nav/>
       <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/About" component={About}/>
+        <div className="scrollbar scrollbar-black borered-black square thin">
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/About" component={About}/>
+        </div>
       </Switch>
     </Router>
   );

@@ -16,7 +16,7 @@ export const Nav = () => {
                         <a href="/About" className="nav-link">About</a>
                     </li>
                     <li className="nav-item">
-                        <a href="#" className="nav-link">Logout</a>
+                        <a href="/" className="nav-link">Logout</a>
                     </li>
                 </ul>
             </div>

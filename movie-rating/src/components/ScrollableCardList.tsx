@@ -5,7 +5,7 @@ import { MovieCard } from './MovieCard';
 type ScrollableCardListProps = {
     movies: Array<MovieCardContent>
     watchlist?: React.ElementType
-    wishlistClickHandler: (movie: MovieCardContent) => void
+    watchlistClickHandler: (movie: MovieCardContent) => void
 } 
 
 export const ScrollableCardList = (props: ScrollableCardListProps) => {
@@ -17,7 +17,7 @@ export const ScrollableCardList = (props: ScrollableCardListProps) => {
                         <MovieCard 
                             movie={movie} 
                             watchlist={props.watchlist} 
-                            wishlistClickHandler={props.wishlistClickHandler}
+                            watchlistClickHandler={props.watchlistClickHandler}
                         />
                     </div>
                 ))}

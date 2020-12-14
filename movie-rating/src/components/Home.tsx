@@ -42,20 +42,27 @@ export const Home = () => {
     React.useEffect(() => {
     }, [])
 
-    const addToWishlist = (movie: MovieCardContent) => {
+    const addToWatchlist = (movie: MovieCardContent) => {
         const newWatchlist = [...watchlistMovieCards, movie];
         setWatchlistMovieCards(newWatchlist);
     };
+
+    const removeFromWatchlist = (movie:MovieCardContent) => {
+        const filteredWatchlist = watchlistMovieCards.filter(
+            (watchlist) => watchlist.imdbID !== movie.imdbID
+        );
+        setWatchlistMovieCards(filteredWatchlist);
+    }
 
     return(
     <div>
         <Carousel/>
         <h3 className="mx-5 text-white mt-3">Popular Films</h3>
-        <ScrollableCardList movies={popularMovieCards} watchlist={AddWatchlist} wishlistClickHandler={addToWishlist}/>
+        <ScrollableCardList movies={popularMovieCards} watchlist={AddWatchlist} watchlistClickHandler={addToWatchlist}/>
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue}/>
-        <ScrollableCardList movies={searchMovieCards} watchlist={AddWatchlist} wishlistClickHandler={addToWishlist}/>
+        <ScrollableCardList movies={searchMovieCards} watchlist={AddWatchlist} watchlistClickHandler={addToWatchlist}/>
         <h3 className="mx-5 text-white mt-3">Watchlist</h3>
-        <ScrollableCardList movies={watchlistMovieCards} watchlist={RemoveWatchlist} wishlistClickHandler={addToWishlist}/>
+        <ScrollableCardList movies={watchlistMovieCards} watchlist={RemoveWatchlist} watchlistClickHandler={removeFromWatchlist}/>
     </div>
     );
 }

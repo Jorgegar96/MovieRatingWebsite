@@ -3,6 +3,7 @@ import { MovieCardContent } from '../types/types.d'
 import { Carousel } from './Carousel'
 import { ScrollableCardList } from './ScrollableCardList'
 import { SearchBox } from './SearchBox'
+import { AddWatchlist } from './AddWatchlist'
 
 
 
@@ -45,11 +46,11 @@ export const Home = () => {
     <div>
         <Carousel/>
         <h3 className="mx-5 text-white mt-3">Popular Films</h3>
-        <ScrollableCardList movies={popularMovieCards}/>
+        <ScrollableCardList movies={popularMovieCards} watchlist={AddWatchlist}/>
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue}/>
-        <ScrollableCardList movies={searchMovieCards}/>
+        <ScrollableCardList movies={searchMovieCards} watchlist={AddWatchlist}/>
         <h3 className="mx-5 text-white mt-3">Watchlist</h3>
-        <ScrollableCardList movies={watchlistMovieCards}/>
+        <ScrollableCardList movies={watchlistMovieCards} watchlist={AddWatchlist}/>
     </div>
     );
 }

@@ -13,7 +13,7 @@ export const ScrollableCardList = (props: ScrollableCardListProps) => {
             <div className="card-deck">
                 <div className="d-flex flex-row flex-nowrap overflow-auto scrollbar-primary">
                     {props.movies.map(movie => (
-                        <div className='col-lg-3 col-md-6 col-sm-12 col-12'>
+                        <div className='col-lg-3 col-md-6 col-sm-12 col-12 d-flex align-items-stretch'>
                             <MovieCard movie={movie}/>
                         </div>
                     ))}

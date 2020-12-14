@@ -4,6 +4,7 @@ import { Carousel } from './Carousel'
 import { ScrollableCardList } from './ScrollableCardList'
 import { SearchBox } from './SearchBox'
 import { AddWatchlist } from './AddWatchlist'
+import { RemoveWatchlist } from './RemoveWatchlist'
 
 
 
@@ -54,7 +55,7 @@ export const Home = () => {
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue}/>
         <ScrollableCardList movies={searchMovieCards} watchlist={AddWatchlist} wishlistClickHandler={addToWishlist}/>
         <h3 className="mx-5 text-white mt-3">Watchlist</h3>
-        <ScrollableCardList movies={watchlistMovieCards} watchlist={AddWatchlist} wishlistClickHandler={addToWishlist}/>
+        <ScrollableCardList movies={watchlistMovieCards} watchlist={RemoveWatchlist} wishlistClickHandler={addToWishlist}/>
     </div>
     );
 }

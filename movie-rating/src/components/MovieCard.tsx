@@ -5,6 +5,7 @@ import { MovieCardContent } from '../types/types.d'
 type MovieCardProps = {
     movie: MovieCardContent
     watchlist?: React.ElementType
+    wishlistClickHandler: (movie: MovieCardContent) => void
 }
 
 export const MovieCard = (props: MovieCardProps) => {
@@ -15,9 +16,12 @@ export const MovieCard = (props: MovieCardProps) => {
                 <img className="card-img-top" src={props.movie.Poster} alt={props.movie.Title}/>
                 <p className="card-text text-white mt-2">{props.movie.Title}</p>
             </div>
-            <div className="overlay d-flex align-items-center justify-content-center">
-                    <WatchlistComponent/>
-                </div>
+            <div 
+                className="overlay d-flex align-items-center justify-content-center"
+                onClick={() => props.wishlistClickHandler(props.movie)}
+            >
+                <WatchlistComponent/>
+            </div>
         </div>
     );
 }

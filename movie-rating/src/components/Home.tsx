@@ -39,18 +39,22 @@ export const Home = () => {
         getMoviesRequest('Star wars', setPopularMovieCards)
     }, []);
     React.useEffect(() => {
-        getMoviesRequest('Avengers', setWatchlistMovieCards)
     }, [])
+
+    const addToWishlist = (movie: MovieCardContent) => {
+        const newWatchlist = [...watchlistMovieCards, movie];
+        setWatchlistMovieCards(newWatchlist);
+    };
 
     return(
     <div>
         <Carousel/>
         <h3 className="mx-5 text-white mt-3">Popular Films</h3>
-        <ScrollableCardList movies={popularMovieCards} watchlist={AddWatchlist}/>
+        <ScrollableCardList movies={popularMovieCards} watchlist={AddWatchlist} wishlistClickHandler={addToWishlist}/>
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue}/>
-        <ScrollableCardList movies={searchMovieCards} watchlist={AddWatchlist}/>
+        <ScrollableCardList movies={searchMovieCards} watchlist={AddWatchlist} wishlistClickHandler={addToWishlist}/>
         <h3 className="mx-5 text-white mt-3">Watchlist</h3>
-        <ScrollableCardList movies={watchlistMovieCards} watchlist={AddWatchlist}/>
+        <ScrollableCardList movies={watchlistMovieCards} watchlist={AddWatchlist} wishlistClickHandler={addToWishlist}/>
     </div>
     );
 }

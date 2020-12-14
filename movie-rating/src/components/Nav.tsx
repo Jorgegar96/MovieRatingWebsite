@@ -4,7 +4,7 @@ import filmlogo from '../camera-reels-fill-white.svg'
 export const Nav = () => {
     return(
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-            <a href="#" className="navbar-brand">MovieRatings</a><img src={filmlogo} alt=""/>
+            <a href="/" className="navbar-brand">MovieRatings</a><img src={filmlogo} alt=""/>
             <button className="navbar-toggler" data-toggle="collapse" data-target="#navbarmenu">
                 <span className="navbar-toggler-icon"></span>
             </button>

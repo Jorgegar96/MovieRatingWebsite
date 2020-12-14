@@ -18,3 +18,23 @@ body{
   width: 8px;
 }
 
+.card:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.card:hover .overlay{
+  opacity: 1;  
+}
+
+.overlay {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  transition: 1s ease;
+  opacity: 0;
+  bottom: 0;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}

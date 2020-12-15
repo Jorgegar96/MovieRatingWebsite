@@ -12,9 +12,9 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
             <div className="row">
                 <div className="col-md-4">
                     <img className="col-md-auto" src={props.movie.Poster} alt={props.movie.Title}/>
-                    <div className="mt-2">
-                        <button type="button" className="btn bg-light"><i className="fa fa-thumbs-o-up"></i></button>
-                        <button type="button" className="btn bg-light"><i className="fa fa-thumbs-o-down"></i></button>
+                    <div className="mt-2 d-flex justify-content-center">
+                        <button type="button" className="btn btn-outline-light mr-4"><i className="fa fa-thumbs-o-up"> Like </i></button>
+                        <button type="button" className="btn btn-outline-light"><i className="fa fa-thumbs-o-down"> Dislike</i></button>
                     </div>
                 </div>
                 <div className="container col-md-8">

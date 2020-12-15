@@ -11,13 +11,13 @@ function App() {
   return (
     <Router>
       <Nav/>
-      <Switch>
-        <div className="scrollbar scrollbar-black borered-black square thin">
-          <Route exact path="/" component={Home}/>
-          <Route exact path="/About" component={About}/>
-          <Route exact path="/:idmbID" component={MoviePage}/>
-        </div>
-      </Switch>
+      <div className="scrollbar scrollbar-black borered-black square thin">
+        <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/About" component={About}/>
+            <Route exact path="/:idmbID" component={MoviePage}/>
+        </Switch>
+      </div>
     </Router>
   );
 }

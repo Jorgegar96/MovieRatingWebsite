@@ -2,6 +2,7 @@ import * as React from 'react'
 import { MovieInfo } from '../types/types.d'
 import { RouteComponentProps } from 'react-router-dom'
 import { MoviePageCard } from './MoviePageCard'
+import { CommentSection } from './CommentsSection'
 
 interface PropsMoviePage extends RouteComponentProps<PropsMovieState> {
     
@@ -76,9 +77,8 @@ export const MoviePage = (props: PropsMoviePage) => {
 
     return(
         <div className="container py-5">
-            <div className="row">
                 <MoviePageCard movie={movieInfoCard}/>
-            </div>
+                <CommentSection/>
         </div>
     )
 }

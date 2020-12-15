@@ -60,7 +60,7 @@ export const MoviePage = (props: PropsMoviePage) => {
     )
 
     const getMovieRequest = async (idmbID: string) => {
-        const api_url = `http://www.omdbapi.com/?i=${idmbID}&apikey=c4ca4c7d`
+        const api_url = `http://www.omdbapi.com/?i=${idmbID}&plot=full&apikey=c4ca4c7d`
         const response = await fetch(api_url)
         const responseJson = await response.json()
 
@@ -75,8 +75,8 @@ export const MoviePage = (props: PropsMoviePage) => {
     }, []);
 
     return(
-        <div className="container">
-            <div className="row mt-5">
+        <div className="container py-5">
+            <div className="row">
                 <MoviePageCard movie={movieInfoCard}/>
             </div>
         </div>

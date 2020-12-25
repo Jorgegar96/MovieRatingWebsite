@@ -1,7 +1,11 @@
 import * as React from 'react'
 import filmlogo from '../camera-reels-fill-white.svg'
+import { useAuth0 } from '@auth0/auth0-react'
+import { LoginBtn } from './LoginBtn'
+import { LogoutBtn } from './LogoutBtn'
 
 export const Nav = () => {
+    const { isAuthenticated } = useAuth0()
     return(
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
             <a href="/" className="navbar-brand">MovieRatings</a><img src={filmlogo} alt=""/>
@@ -14,7 +18,7 @@ export const Nav = () => {
                         <a href="/About" className="nav-link">About</a>
                     </li>
                     <li className="nav-item">
-                        <a href="/" className="nav-link">Logout</a>
+                        {isAuthenticated ? <LogoutBtn/> : <LoginBtn/>}
                     </li>
                 </ul>
             </div>

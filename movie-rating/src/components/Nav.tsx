@@ -31,9 +31,6 @@ export const Nav = () => {
                     <li className="nav-item">
                         {isAuthenticated ? <LogoutBtn/> : <LoginBtn/>}
                     </li>
-                    <li className="nav-item">
-                        {isLoading ? "Loading" : user.sub}
-                    </li>
                 </ul>
             </div>
         </nav>

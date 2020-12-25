@@ -5,7 +5,18 @@ import { LoginBtn } from './LoginBtn'
 import { LogoutBtn } from './LogoutBtn'
 
 export const Nav = () => {
-    const { isAuthenticated } = useAuth0()
+    const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+    console.log(isAuthenticated);
+    console.log(isLoading);
+    console.log(user)
+    React.useEffect(() => {
+        const checkAuth = async () => {
+            console.log("Authenticated: ", isAuthenticated)
+        }
+        if(!isLoading){
+            checkAuth()
+        }
+    }, [isLoading])
     return(
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
             <a href="/" className="navbar-brand">MovieRatings</a><img src={filmlogo} alt=""/>
@@ -19,6 +30,9 @@ export const Nav = () => {
                     </li>
                     <li className="nav-item">
                         {isAuthenticated ? <LogoutBtn/> : <LoginBtn/>}
+                    </li>
+                    <li className="nav-item">
+                        {isLoading ? "Loading" : user.sub}
                     </li>
                 </ul>
             </div>

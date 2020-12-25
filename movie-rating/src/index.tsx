@@ -9,7 +9,7 @@ import { Auth0Provider } from '@auth0/auth0-react';
 ReactDOM.render(
   <Auth0Provider
     domain="jlgo-dev.us.auth0.com"
-    clientId="1puhZ3UYrlujD2wvXvpCU3nbJ0BvT240"
+    clientId="2SITiVrn4TZSKi8xpsCCTLHPjuvsmpgL"
     redirectUri={window.location.origin}
   >
     <React.StrictMode>

@@ -57,7 +57,7 @@ export type MovieInfo = {
 }
 
 export type Comment = {
-    id: string
+    id?: string
     comment: string
     userID: string
     idmbID: string
@@ -67,7 +67,7 @@ export type Comment = {
 }
 
 export type Reaction = {
-    id: string
+    id?: string
     reaction1: string
     userID: string
     idmbID: string

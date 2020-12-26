@@ -76,6 +76,14 @@ export const MoviePage = (props: PropsMoviePage) => {
         defaultReaction
     )
 
+    const [likes, setLikes]: [number, (likes: number) => void] = React.useState(
+        0
+    )
+
+    const [dislikes, setDislikes]: [number, (dislikes: number) => void] = React.useState(
+        0
+    )
+
     const getMovieRequest = async (idmbID: string) => {
         let api_url = `http://www.omdbapi.com/?i=${idmbID}&plot=full&apikey=c4ca4c7d`;
         let response = await fetch(api_url);
@@ -91,20 +99,21 @@ export const MoviePage = (props: PropsMoviePage) => {
         responseJson = await response.json();
         console.log(responseJson);
         if(responseJson){
-            let likes: number = 0;
-            let dislikes: number = 0;
+            let clikes: number = 0;
+            let cdislikes: number = 0;
             responseJson.map((reaction: Reaction) => {
                 if(reaction.reaction1 === "Liked"){
-                    likes++;
+                    clikes++;
                 }else{
-                    dislikes++;
+                    cdislikes++;
                 }
                 if(isAuthenticated && reaction.userID === user.sub){
                     setUserReaction(reaction);
                 }
             })
-            
-            console.log(likes)
+            setLikes(clikes);
+            setDislikes(cdislikes);
+            console.log(likes);
         }
     }
 
@@ -114,7 +123,12 @@ export const MoviePage = (props: PropsMoviePage) => {
 
     return(
         <div className="container py-5">
-                <MoviePageCard movie={movieInfoCard}/>
+                <MoviePageCard
+                    movie={movieInfoCard} 
+                    userReaction={userReaction}
+                    likes={likes}
+                    dislikes={dislikes}
+                />
                 <CommentSection/>
         </div>
     )

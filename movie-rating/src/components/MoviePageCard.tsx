@@ -1,20 +1,73 @@
 import * as React from 'react'
-import { MovieInfo } from '../types/types.d'
+import { MovieInfo, Reaction } from '../types/types.d'
+import { useAuth0 } from '@auth0/auth0-react'
 
 type MoviePageCardProps = {
     movie: MovieInfo
+    userReaction: Reaction
+    likes: number
+    dislikes: number
 }
 
 
 export const MoviePageCard = (props: MoviePageCardProps) => {
+
+    const { user, isAuthenticated } = useAuth0();
+
+    const [userReaction, setUserReaction]: [Reaction, (userReaction: Reaction) => void] = React.useState(
+        props.userReaction
+    )
+
+    const sendReactionToApi = async (liked: boolean, idmbID: string) => {
+        var dateinfo = new Date();
+        const reaction: Reaction = {
+            id: "",
+            idmbID: idmbID,
+            userID: user.sub,
+            cdate: dateinfo.getDate().toLocaleString(),
+            reaction1: "None",
+            ctime: dateinfo.getTime().toString()
+        };
+        if(liked){
+            reaction.reaction1 = "Liked";
+        }else{
+            reaction.reaction1 = "Disliked";
+        }
+        const api_url = `https://localhost:44361/api/Reactions`;
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(reaction)
+        };
+        let response = await fetch(api_url, requestOptions);
+        let responseJson = await response.json();
+        if(responseJson){
+            setUserReaction(reaction);
+        }
+    }
+
     return(
         <div className="container">
             <div className="row">
                 <div className="col-md-4">
                     <img className="col-md-auto" src={props.movie.Poster} alt={props.movie.Title}/>
                     <div className="mt-2 d-flex justify-content-center">
-                        <button type="button" className="btn btn-outline-light mr-4"><i className="fa fa-thumbs-o-up"> Like </i></button>
-                        <button type="button" className="btn btn-outline-light"><i className="fa fa-thumbs-o-down"> Dislike</i></button>
+                        <button 
+                            type="button" 
+                            className="btn btn-outline-light mr-4"
+                            disabled={!isAuthenticated} 
+                            onClick={() => sendReactionToApi(true, props.movie.imdbID)}
+                        >
+                            <i className="fa fa-thumbs-o-up"> Like </i>
+                        </button>
+                        <button 
+                            type="button" 
+                            className="btn btn-outline-light" 
+                            disabled={!isAuthenticated} 
+                            onClick={() => sendReactionToApi(false, props.movie.imdbID)}
+                        >
+                            <i className="fa fa-thumbs-o-down"> Dislike</i>
+                        </button>
                     </div>
                 </div>
                 <div className="container col-md-8">

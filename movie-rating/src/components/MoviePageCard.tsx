@@ -32,12 +32,24 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
         }else{
             reaction.reaction1 = "Disliked";
         }
-        const api_url = `https://localhost:44361/api/Reactions`;
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(reaction)
-        };
+        let api_url = `https://localhost:44361/api/Reactions`;
+        let requestOptions;
+        if(props.userReaction.id === "None"){
+            requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(reaction)
+            };    
+        } else{
+            api_url = api_url.concat(`/${props.userReaction.id}`);
+            reaction.id = props.userReaction.id;
+            requestOptions = {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(reaction)
+            };
+        }
+        
         let response = await fetch(api_url, requestOptions);
         let responseJson = await response.json();
         if(responseJson){

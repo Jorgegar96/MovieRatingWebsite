@@ -21,7 +21,6 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
     const sendReactionToApi = async (liked: boolean, idmbID: string) => {
         var dateinfo = new Date();
         const reaction: Reaction = {
-            id: "",
             idmbID: idmbID,
             userID: user.sub,
             cdate: dateinfo.getDate().toLocaleString(),

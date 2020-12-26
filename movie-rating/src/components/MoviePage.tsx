@@ -50,7 +50,7 @@ export const MoviePage = (props: PropsMoviePage) => {
     Metascore: "",
     imdbRating: "",
     imdbVotes: "",
-    imdbID: "",
+    imdbID: props.match.params.idmbID,
     Type: "",
     DVD: "",
     BoxOffice: "",
@@ -59,74 +59,31 @@ export const MoviePage = (props: PropsMoviePage) => {
     Response: ""
     }
 
-    const defaultReaction: Reaction = {
-        id: "None",
-        idmbId: "None",
-        userId: "None",
-        reaction1: "None",
-        cdate: "None",
-        ctime: "None"
-    }
-
     const [movieInfoCard, setMovieInfoCard]: [MovieInfo, (movieCard: MovieInfo) => void] = React.useState(
         defaultMovieInfo
     )
 
-    const [userReaction, setUserReaction]: [Reaction, (reaction: Reaction) => void] = React.useState(
-        defaultReaction
-    )
-
-    const [likes, setLikes]: [number, (likes: number) => void] = React.useState(
-        0
-    )
-
-    const [dislikes, setDislikes]: [number, (dislikes: number) => void] = React.useState(
-        0
-    )
-
     const getMovieRequest = async (idmbID: string) => {
-        let api_url = `http://www.omdbapi.com/?i=${idmbID}&plot=full&apikey=c4ca4c7d`;
-        let response = await fetch(api_url);
-        let responseJson = await response.json();
+        const api_url = `http://www.omdbapi.com/?i=${idmbID}&plot=full&apikey=c4ca4c7d`;
+        const response = await fetch(api_url);
+        const responseJson = await response.json();
 
         console.log(responseJson)
         if(responseJson){
             setMovieInfoCard(responseJson);
         }
 
-        api_url = `https://localhost:44361/api/Reactions?idmbID=${idmbID}`;
-        response = await fetch(api_url);
-        responseJson = await response.json();
-        console.log(responseJson);
-        if(responseJson){
-            let clikes: number = 0;
-            let cdislikes: number = 0;
-            responseJson.map((reaction: Reaction) => {
-                if(reaction.reaction1 === "Liked"){
-                    clikes++;
-                }else{
-                    cdislikes++;
-                }
-                if(isAuthenticated && reaction.userId === user.sub){
-                    setUserReaction(reaction);
-                }
-            })
-            setLikes(clikes);
-            setDislikes(cdislikes);
-        }
+        
     }
 
     React.useEffect(() => {
         getMovieRequest(props.match.params.idmbID)
     }, []);
-
+ 
     return(
         <div className="container py-5">
                 <MoviePageCard
                     movie={movieInfoCard} 
-                    userReaction={userReaction}
-                    likes={likes}
-                    dislikes={dislikes}
                 />
                 <CommentSection/>
         </div>

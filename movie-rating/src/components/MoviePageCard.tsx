@@ -21,8 +21,8 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
     const sendReactionToApi = async (liked: boolean, idmbID: string) => {
         var dateinfo = new Date();
         const reaction: Reaction = {
-            idmbID: idmbID,
-            userID: user.sub,
+            idmbId: idmbID,
+            userId: user.sub,
             cdate: dateinfo.getDate().toLocaleString(),
             reaction1: "None",
             ctime: dateinfo.getTime().toString()
@@ -53,19 +53,19 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
                     <div className="mt-2 d-flex justify-content-center">
                         <button 
                             type="button" 
-                            className="btn btn-outline-light mr-4"
+                            className={props.userReaction.reaction1 === 'Liked' ? "btn btn-light mr-4" : "btn btn-outline-light mr-4"}
                             disabled={!isAuthenticated} 
                             onClick={() => sendReactionToApi(true, props.movie.imdbID)}
                         >
-                            <i className="fa fa-thumbs-o-up"> Like </i>
+                            <i className="fa fa-thumbs-o-up"> Like {props.likes}</i>
                         </button>
                         <button 
                             type="button" 
-                            className="btn btn-outline-light" 
+                            className={props.userReaction.reaction1 === 'Disliked' ? "btn btn-light mr-4" : "btn btn-outline-light mr-4"} 
                             disabled={!isAuthenticated} 
                             onClick={() => sendReactionToApi(false, props.movie.imdbID)}
                         >
-                            <i className="fa fa-thumbs-o-down"> Dislike</i>
+                            <i className="fa fa-thumbs-o-down"> Dislike {props.dislikes}</i>
                         </button>
                     </div>
                 </div>

@@ -61,8 +61,8 @@ export const MoviePage = (props: PropsMoviePage) => {
 
     const defaultReaction: Reaction = {
         id: "None",
-        idmbID: "None",
-        userID: "None",
+        idmbId: "None",
+        userId: "None",
         reaction1: "None",
         cdate: "None",
         ctime: "None"
@@ -107,13 +107,12 @@ export const MoviePage = (props: PropsMoviePage) => {
                 }else{
                     cdislikes++;
                 }
-                if(isAuthenticated && reaction.userID === user.sub){
+                if(isAuthenticated && reaction.userId === user.sub){
                     setUserReaction(reaction);
                 }
             })
             setLikes(clikes);
             setDislikes(cdislikes);
-            console.log(likes);
         }
     }
 

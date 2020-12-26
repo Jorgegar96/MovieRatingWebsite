@@ -61,14 +61,19 @@ export const MoviePage = (props: PropsMoviePage) => {
     )
 
     const getMovieRequest = async (idmbID: string) => {
-        const api_url = `http://www.omdbapi.com/?i=${idmbID}&plot=full&apikey=c4ca4c7d`
-        const response = await fetch(api_url)
-        const responseJson = await response.json()
+        let api_url = `http://www.omdbapi.com/?i=${idmbID}&plot=full&apikey=c4ca4c7d`;
+        let response = await fetch(api_url);
+        let responseJson = await response.json();
 
         console.log(responseJson)
         if(responseJson){
-            setMovieInfoCard(responseJson)
+            setMovieInfoCard(responseJson);
         }
+
+        api_url = `https://localhost:44361/api/Reactions?idmbID=${idmbID}`;
+        response = await fetch(api_url);
+        responseJson = await response.json();
+        console.log(responseJson[0].reaction1);
     }
 
     React.useEffect(() => {

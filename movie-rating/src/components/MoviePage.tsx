@@ -1,8 +1,9 @@
 import * as React from 'react'
-import { MovieInfo } from '../types/types.d'
+import { MovieInfo, Reaction } from '../types/types.d'
 import { RouteComponentProps } from 'react-router-dom'
 import { MoviePageCard } from './MoviePageCard'
 import { CommentSection } from './CommentsSection'
+import { useAuth0 } from '@auth0/auth0-react' 
 
 interface PropsMoviePage extends RouteComponentProps<PropsMovieState> {
     
@@ -15,7 +16,9 @@ interface PropsMovieState  {
 
 export const MoviePage = (props: PropsMoviePage) => {
 
-    const defaulMovieInfo: MovieInfo = {
+    const { user, isAuthenticated } = useAuth0();
+
+    const defaultMovieInfo: MovieInfo = {
         Title: "",
     Year: "",
     Rated: "",
@@ -56,8 +59,21 @@ export const MoviePage = (props: PropsMoviePage) => {
     Response: ""
     }
 
+    const defaultReaction: Reaction = {
+        id: "None",
+        idmbID: "None",
+        userID: "None",
+        reaction1: "None",
+        cdate: "None",
+        ctime: "None"
+    }
+
     const [movieInfoCard, setMovieInfoCard]: [MovieInfo, (movieCard: MovieInfo) => void] = React.useState(
-        defaulMovieInfo
+        defaultMovieInfo
+    )
+
+    const [userReaction, setUserReaction]: [Reaction, (reaction: Reaction) => void] = React.useState(
+        defaultReaction
     )
 
     const getMovieRequest = async (idmbID: string) => {
@@ -73,7 +89,23 @@ export const MoviePage = (props: PropsMoviePage) => {
         api_url = `https://localhost:44361/api/Reactions?idmbID=${idmbID}`;
         response = await fetch(api_url);
         responseJson = await response.json();
-        console.log(responseJson[0].reaction1);
+        console.log(responseJson);
+        if(responseJson){
+            let likes: number = 0;
+            let dislikes: number = 0;
+            responseJson.map((reaction: Reaction) => {
+                if(reaction.reaction1 === "Liked"){
+                    likes++;
+                }else{
+                    dislikes++;
+                }
+                if(isAuthenticated && reaction.userID === user.sub){
+                    setUserReaction(reaction);
+                }
+            })
+            
+            console.log(likes)
+        }
     }
 
     React.useEffect(() => {

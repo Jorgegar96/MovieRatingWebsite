@@ -68,7 +68,7 @@ export type Comment = {
 
 export type Reaction = {
     id: string
-    reaction: string
+    reaction1: string
     userID: string
     idmbID: string
     cdate: string

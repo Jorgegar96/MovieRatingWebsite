@@ -16,8 +16,7 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
         idmbId: "None",
         userId: "None",
         reaction1: "None",
-        cdate: "None",
-        ctime: "None"
+        eventdate: "None",
     }
 
     const [userReaction, setUserReaction]: [Reaction, (reaction: Reaction) => void] = React.useState(
@@ -33,14 +32,13 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
     )
 
     const sendReactionToApi = async (liked: boolean, idmbID: string) => {
-        var dateinfo = new Date();
+        const dateinfo = new Date();
         console.log(likes)
         const reaction: Reaction = {
             idmbId: idmbID,
             userId: user.sub,
-            cdate: dateinfo.getDate().toLocaleString(),
+            eventdate: dateinfo.toString(),
             reaction1: "None",
-            ctime: dateinfo.getTime().toString()
         };
         if(liked){
             reaction.reaction1 = "Liked";

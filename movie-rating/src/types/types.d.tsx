@@ -58,12 +58,11 @@ export type MovieInfo = {
 
 export type Comment = {
     id?: string
-    comment: string
+    comment1: string
     userId: string
     idmbId: string
     username: string
-    cdate: string
-    ctime: string
+    eventdate: string
 }
 
 export type Reaction = {
@@ -71,6 +70,5 @@ export type Reaction = {
     reaction1: string
     userId: string
     idmbId: string
-    cdate: string
-    ctime: string
+    eventdate: string
 }

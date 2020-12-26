@@ -13,30 +13,27 @@ export const CommentsList = (props: CommentsListProps) => {
     let defaultCommentList: Array<Comment> = [
         {
             id: "000",
-            comment: "The movie was pretty good.",
+            comment1: "The movie was pretty good.",
             userId: "001",
             idmbId: "001",
             username: "Messi",
-            cdate: "Tue Nov 12 2019",
-            ctime: "19:12:06 GMT-0500 (Eastern Standard Time)"
+            eventdate: "19:12:06 GMT-0500 (Eastern Standard Time)"
         },
         {
             id: "001",
-            comment: "Really like id towards the end.",
+            comment1: "Really like id towards the end.",
             userId: "002",
             idmbId: "001",
             username: "Alex",
-            cdate: "Tue Nov 15 2019",
-            ctime: "19:19:06 GMT-0500 (Eastern Standard Time)"
+            eventdate: "19:19:06 GMT-0500 (Eastern Standard Time)"
         },
         {
             id: "002",
-            comment: "The movie was pretty good.",
+            comment1: "The movie was pretty good.",
             userId: "003",
             idmbId: "001",
             username: "Andres",
-            cdate: "Tue Nov 24 2019",
-            ctime: "20:12:06 GMT-0500 (Eastern Standard Time)"
+            eventdate: "20:12:06 GMT-0500 (Eastern Standard Time)"
         }
     ]
 
@@ -63,9 +60,9 @@ export const CommentsList = (props: CommentsListProps) => {
                 <div className="row d-flex justify-content-center" id={comment.id} key={comment.id}>
                 <div className="card col-md-8">
                     <div className="card-body">
-                        <h5 className="card-title">{comment.userId}</h5>
-                        <h6 className="card-subtitle mb-2 text-muted">{comment.cdate}</h6>
-                        <p className="card-text text-left">{comment.comment}</p>
+                        <h5 className="card-title">{comment.username}</h5>
+                        <h6 className="card-subtitle mb-2 text-muted">{comment.eventdate}</h6>
+                        <p className="card-text text-left">{comment.comment1}</p>
                     </div>
                     </div>
                 </div>

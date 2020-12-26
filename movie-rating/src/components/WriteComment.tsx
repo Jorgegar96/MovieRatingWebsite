@@ -1,6 +1,10 @@
 import * as React from 'react'
 
-export const WriteComment = () => {
+type WriteCommentProps = {
+    idmbID: string
+}
+
+export const WriteComment = (props: WriteCommentProps) => {
 
     
 

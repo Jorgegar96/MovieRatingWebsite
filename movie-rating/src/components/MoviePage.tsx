@@ -85,7 +85,7 @@ export const MoviePage = (props: PropsMoviePage) => {
                 <MoviePageCard
                     movie={movieInfoCard} 
                 />
-                <CommentSection/>
+                <CommentSection idmbID={props.match.params.idmbID}/>
         </div>
     )
 }

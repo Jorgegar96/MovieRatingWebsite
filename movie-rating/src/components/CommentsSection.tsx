@@ -2,12 +2,16 @@ import * as React from 'react'
 import { WriteComment } from './WriteComment'
 import { CommentsList } from './CommentsList'
 
-export const CommentSection = () => {
+type CommentSectionProps = {
+    idmbID: string
+}
+
+export const CommentSection = (props: CommentSectionProps) => {
     return (
         <div>
 
-            <WriteComment/>
-            <CommentsList/>
+            <WriteComment idmbID={props.idmbID}/>
+            <CommentsList idmbID={props.idmbID}/>
         </div>
     )
 }

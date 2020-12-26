@@ -59,8 +59,8 @@ export type MovieInfo = {
 export type Comment = {
     id?: string
     comment: string
-    userID: string
-    idmbID: string
+    userId: string
+    idmbId: string
     username: string
     cdate: string
     ctime: string

@@ -44,10 +44,8 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
         };
         if(liked){
             reaction.reaction1 = "Liked";
-            setLikes(likes+1)
         }else{
             reaction.reaction1 = "Disliked";
-            setDislikes(dislikes+1)
         }
         let api_url = `https://localhost:44361/api/Reactions`;
         let requestOptions;
@@ -60,12 +58,7 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
             let response = await fetch(api_url, requestOptions);
             let responseJson = await response.json();
             if(responseJson){
-                if(liked){
-                    setLikes(likes+1)
-                }else{
-                    setDislikes(dislikes+1)
-                }
-                setUserReaction(reaction);
+                getMovieReactions(idmbID);
             }
         } else{
             api_url = api_url.concat(`/${userReaction.id}`);
@@ -77,8 +70,7 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
             };
             await fetch(api_url, requestOptions)
                 .then(() => {
-                    setUserReaction(reaction);
-
+                    getMovieReactions(idmbID);
                 });
         }
         

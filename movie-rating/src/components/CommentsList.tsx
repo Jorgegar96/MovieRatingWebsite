@@ -50,6 +50,23 @@ export const CommentsList = (props: CommentsListProps) => {
             }
     }
 
+    const deleteComment = async (id: string) => {
+        const api_url = `https://localhost:44361/api/Comments/${id}`
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {},
+            body: ''
+        }
+        const response = await fetch(api_url, requestOptions);
+        const responseJson = response.json();
+        if(responseJson){
+            alert("Your comment has been successfully removed");
+            window.location.reload();
+        }else{
+            alert("An error ocurred while removing your comment");
+        }
+    }
+
     React.useEffect(() => {
         getComments(props.idmbID);
     }, [])
@@ -58,12 +75,15 @@ export const CommentsList = (props: CommentsListProps) => {
         <div className="container mt-5">
             {commentsList.map(comment => (
                 <div className="row d-flex justify-content-center" id={comment.id} key={comment.id}>
-                <div className="card col-md-8">
-                    <div className="card-body">
-                        <h5 className="card-title">{comment.username}</h5>
-                        <h6 className="card-subtitle mb-2 text-muted">{comment.eventdate}</h6>
-                        <p className="card-text text-left">{comment.comment1}</p>
-                    </div>
+                    <div className="card col-md-8">
+                        <div className="card-body">
+                            <h5 className="card-title">{comment.username}</h5>
+                            <h6 className="card-subtitle mb-2 text-muted">{(new Date(comment.eventdate)).toLocaleString()}</h6>
+                            <p className="card-text text-left">{comment.comment1}</p>
+                            {isAuthenticated && comment.userId === user.sub ? (
+                                <button className="btn bg-danger text-light" onClick={() => deleteComment(comment.id!)}>Delete</button>
+                            ):''}
+                        </div>
                     </div>
                 </div>
             ))}

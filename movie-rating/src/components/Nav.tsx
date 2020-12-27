@@ -25,6 +25,12 @@ export const Nav = () => {
             </button>
             <div className="collapse navbar-collapse" id="navbarmenu">
                 <ul className="navbar-nav ml-auto">
+                    {isAuthenticated ? 
+                        <li className="nav-item"> 
+                            <a className="nav-link">Logged as: {user.name}</a>
+                        </li>: 
+                        <h4></h4>
+                    }
                     <li className="nav-item">
                         <a href="/About" className="nav-link">About</a>
                     </li>

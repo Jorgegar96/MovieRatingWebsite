@@ -74,10 +74,10 @@ export const Home = () => {
         }   
     };
 
-    const removeFromWatchlist = async (movie:MovieCardContent, watchlistid?: string) => {
+    const removeFromWatchlist = async (movie:MovieCardContent) => {
         if(isAuthenticated){
 
-            const api_url = `https://localhost:44361/api/Watchlists/${watchlistid}`;
+            const api_url = `https://localhost:44361/api/Watchlists/${movie.id}`;
             const requestOptions = {
                 method: 'DELETE',
                 headers: {},

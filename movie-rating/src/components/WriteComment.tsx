@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Comment } from '../types/types.d';
 import { useAuth0 } from '@auth0/auth0-react'
+import { deflateSync } from 'zlib';
 
 type WriteCommentProps = {
     idmbID: string

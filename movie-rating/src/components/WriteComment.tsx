@@ -30,7 +30,15 @@ export const WriteComment = (props: WriteCommentProps) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(comment)
         };
-        await fetch(api_url, requestOptions);
+        const response = await fetch(api_url, requestOptions);
+        const responseJson =  await response.json();
+        if (responseJson){
+            setCtext("");
+            alert("Your comment has been uploaded succesfully");
+            window.location.reload()
+        }else{
+            alert("An error ocurred while uploading your comment");
+        }
     }
 
     return (

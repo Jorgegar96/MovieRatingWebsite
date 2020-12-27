@@ -1,9 +1,13 @@
 import * as React from 'react'
 
-export const AddWatchlist = () => {
+type AddWatchlistProps = {
+    text: string
+}
+
+export const AddWatchlist = (props: AddWatchlistProps) => {
     return(
         <>
-            <span className="mr-2 text-white">Add to Watchlist</span>
+            <span className="mr-2 text-white">{props.text}</span>
             <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 width="16" 

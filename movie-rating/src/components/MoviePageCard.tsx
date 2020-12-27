@@ -58,7 +58,7 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
             if(responseJson){
                 getMovieReactions(idmbID);
             }
-        } else{
+        } else if(userReaction.reaction1 !== reaction.reaction1){
             api_url = api_url.concat(`/${userReaction.id}`);
             reaction.id = userReaction.id;
             requestOptions = {
@@ -69,6 +69,19 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
             await fetch(api_url, requestOptions)
                 .then(() => {
                     getMovieReactions(idmbID);
+                });
+        } else {
+            api_url = api_url.concat(`/${userReaction.id}`);
+            reaction.id = userReaction.id;
+            requestOptions = {
+                method: 'DELETE',
+                headers: {},
+                body: ''
+            };
+            await fetch(api_url, requestOptions)
+                .then(() => {
+                    getMovieReactions(idmbID);
+                    setUserReaction(defaultReaction);
                 });
         }
         

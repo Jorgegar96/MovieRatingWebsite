@@ -45,10 +45,10 @@ export const CommentsList = (props: CommentsListProps) => {
             const api_url = `https://localhost:44361/api/Comments?idmbID=${idmbID}`;
             const response = await fetch(api_url);
             const responseJson = await response.json();
-            const comments: Array<Comment> = responseJson;
-            comments.sort((a, b) => ((new Date(a.eventdate)) > (new Date(b.eventdate)) ? 1 : -1))
             if(responseJson){
-                setCommentsList(responseJson);
+                const comments: Array<Comment> = responseJson;
+                comments.sort((a, b) => ((new Date(a.eventdate)) > (new Date(b.eventdate)) ? 1 : -1))
+                setCommentsList(comments);
             }
     }
 

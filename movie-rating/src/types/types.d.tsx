@@ -72,3 +72,12 @@ export type Reaction = {
     idmbId: string
     eventdate: string
 }
+
+export type Watchlist = {
+    id?: string
+    userId: string
+    idmbId: string
+    movieImage: string
+    movieName: string
+    eventdate: string
+}

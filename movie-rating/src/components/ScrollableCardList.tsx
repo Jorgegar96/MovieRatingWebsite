@@ -5,7 +5,7 @@ import { MovieCard } from './MovieCard';
 type ScrollableCardListProps = {
     movies: Array<MovieCardContent>
     watchlist?: React.ElementType
-    watchlistClickHandler: (movie: MovieCardContent) => void
+    watchlistClickHandler: (movie: MovieCardContent, id?: string) => void
 } 
 
 export const ScrollableCardList = (props: ScrollableCardListProps) => {

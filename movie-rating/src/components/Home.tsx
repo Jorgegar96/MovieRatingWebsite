@@ -104,6 +104,7 @@ export const Home = () => {
     }
 
     const getWatchlistMovies = async () => {
+        console.log(process.env.REACT_APP_BACKEND_SERVER_URL)
         if(isAuthenticated){
             const api_url = `${process.env.REACT_APP_BACKEND_SERVER_URL}Watchlists?userID=${user.sub}`;
             const response = await fetch(api_url);

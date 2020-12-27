@@ -33,7 +33,6 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
 
     const sendReactionToApi = async (liked: boolean, imdbID: string) => {
         const dateinfo = new Date();
-        console.log(likes)
         const reaction: Reaction = {
             imdbId: imdbID,
             userId: user.sub,
@@ -88,8 +87,8 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
         
     }
 
-    const getMovieReactions = async (idmbID: string) => {
-        const api_url = `${process.env.REACT_APP_BACKEND_SERVER_URL}Reactions?idmbID=${idmbID}`;
+    const getMovieReactions = async (imdbID: string) => {
+        const api_url = `${process.env.REACT_APP_BACKEND_SERVER_URL}Reactions?imdbID=${imdbID}`;
         const response = await fetch(api_url);
         const responseJson = await response.json();
         console.log(responseJson);

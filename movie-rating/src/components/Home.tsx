@@ -48,28 +48,38 @@ export const Home = () => {
 
     const addToWatchlist = async (movie: MovieCardContent) => {
 
-        if(isAuthenticated){
-            const watchlistMovie: MovieCardContent = {
-                userId: user.sub,
-                imdbID: movie.imdbID,
-                Poster: movie.Poster,
-                Title: movie.Title,
-                eventdate: (new Date()).toString()
-            }
-            console.log(JSON.stringify(watchlistMovie))
-            const api_url = `https://localhost:44361/api/Watchlists`;
-            const requestOptions = {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(watchlistMovie)
-            }
-            const response = await fetch(api_url, requestOptions);
-            const responseJson = await response.json();
-            if(responseJson){
-                //const newWatchlist = [...watchlistMovieCards, responseJson];
-                getWatchlistMovies()
-            }else{
-                alert("An error ocurred while saving to your watchlist")
+        if(isAuthenticated ){
+            let repeated = false;
+            watchlistMovieCards.map(wmovie => {
+                if(movie.imdbID === wmovie.imdbID){
+                    alert("The movie is alreay in your watchlist");
+                    repeated = true;
+                    return;
+                }
+            })
+            if(!repeated){
+                const watchlistMovie: MovieCardContent = {
+                    userId: user.sub,
+                    imdbID: movie.imdbID,
+                    Poster: movie.Poster,
+                    Title: movie.Title,
+                    eventdate: (new Date()).toString()
+                }
+                console.log(JSON.stringify(watchlistMovie))
+                const api_url = `https://localhost:44361/api/Watchlists`;
+                const requestOptions = {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(watchlistMovie)
+                }
+                const response = await fetch(api_url, requestOptions);
+                const responseJson = await response.json();
+                if(responseJson){
+                    //const newWatchlist = [...watchlistMovieCards, responseJson];
+                    getWatchlistMovies()
+                }else{
+                    alert("An error ocurred while saving to your watchlist")
+                }
             }
         }   
     };

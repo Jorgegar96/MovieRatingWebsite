@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { MovieCardContent, Watchlist } from '../types/types.d'
+import { MovieCardContent } from '../types/types.d'
 import { Carousel } from './Carousel'
 import { ScrollableCardList } from './ScrollableCardList'
 import { SearchBox } from './SearchBox'
@@ -40,22 +40,23 @@ export const Home = () => {
         getMoviesRequest(searchValue, setSearchMovieCards);
     }, [searchValue]);
     React.useEffect(() => {
-        getMoviesRequest('Star wars', setPopularMovieCards)
+        getMoviesRequest('Star wars', setPopularMovieCards);
     }, []);
     React.useEffect(() => {
+        getWatchlistMovies();
     }, [])
 
     const addToWatchlist = async (movie: MovieCardContent) => {
 
         if(isAuthenticated){
-            const watchlistMovie: Watchlist = {
+            const watchlistMovie: MovieCardContent = {
                 userId: user.sub,
-                idmbId: movie.imdbID,
-                movieImage: movie.Poster,
-                movieName: movie.Title,
+                imdbID: movie.imdbID,
+                Poster: movie.Poster,
+                Title: movie.Title,
                 eventdate: (new Date()).toString()
             }
-
+            console.log(JSON.stringify(watchlistMovie))
             const api_url = `https://localhost:44361/api/Watchlists`;
             const requestOptions = {
                 method: 'POST',
@@ -65,8 +66,8 @@ export const Home = () => {
             const response = await fetch(api_url, requestOptions);
             const responseJson = await response.json();
             if(responseJson){
-                const newWatchlist = [...watchlistMovieCards, movie];
-                setWatchlistMovieCards(newWatchlist);
+                //const newWatchlist = [...watchlistMovieCards, responseJson];
+                getWatchlistMovies()
             }else{
                 alert("An error ocurred while saving to your watchlist")
             }
@@ -85,10 +86,10 @@ export const Home = () => {
             const response = await fetch(api_url, requestOptions);
             const responseJson = await response.json();
             if(responseJson){
-                const filteredWatchlist = watchlistMovieCards.filter(
-                    (watchlist) => watchlist.imdbID !== movie.imdbID
-                );
-                setWatchlistMovieCards(filteredWatchlist);
+                //const filteredWatchlist = watchlistMovieCards.filter(
+                //    (watchlist) => watchlist.imdbID !== movie.imdbID
+                //);
+                getWatchlistMovies();
             }else{
                 alert("An error ocurred while removing from your watchlist")
             }
@@ -101,9 +102,9 @@ export const Home = () => {
             const response = await fetch(api_url);
             const responseJson = await response.json();
             if(responseJson){
-                const watchlist: Array<Watchlist> = responseJson;
-                watchlist.sort((a, b) => ((new Date(a.eventdate)) > (new Date(b.eventdate)) ? 1 : -1))
-                
+                const watchlist: Array<MovieCardContent> = responseJson;
+                watchlist.sort((a, b) => ((new Date(a.eventdate!)) > (new Date(b.eventdate!)) ? 1 : -1))
+                setWatchlistMovieCards(watchlist);
             }
         }
         

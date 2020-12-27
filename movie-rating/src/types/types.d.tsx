@@ -8,11 +8,12 @@ export type AboutCardContent = {
 }
 
 export type MovieCardContent = {
+    id?: string
+    userId?: string
     imdbID: string
     Title: string
     Poster: string
-    Year: string
-    Type: string
+    eventdate?: string
 }
 
 export type MovieInfo = {
@@ -70,14 +71,5 @@ export type Reaction = {
     reaction1: string
     userId: string
     idmbId: string
-    eventdate: string
-}
-
-export type Watchlist = {
-    id?: string
-    userId: string
-    idmbId: string
-    movieImage: string
-    movieName: string
     eventdate: string
 }

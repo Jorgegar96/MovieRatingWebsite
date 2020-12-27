@@ -86,9 +86,6 @@ export const Home = () => {
             const response = await fetch(api_url, requestOptions);
             const responseJson = await response.json();
             if(responseJson){
-                //const filteredWatchlist = watchlistMovieCards.filter(
-                //    (watchlist) => watchlist.imdbID !== movie.imdbID
-                //);
                 getWatchlistMovies();
             }else{
                 alert("An error ocurred while removing from your watchlist")
@@ -98,12 +95,26 @@ export const Home = () => {
 
     const getWatchlistMovies = async () => {
         if(isAuthenticated){
-            const api_url = `https://localhost:44361/api/Watchlists?${user.sub}`;
+            const api_url = `https://localhost:44361/api/Watchlists?userId=${user.sub}`;
             const response = await fetch(api_url);
             const responseJson = await response.json();
+            console.log(responseJson)
             if(responseJson){
-                const watchlist: Array<MovieCardContent> = responseJson;
+                let watchlist: Array<MovieCardContent> = [];
+                for(let i=0; i < responseJson.length; i++){
+                    const element: MovieCardContent = {
+                        id: responseJson[i].id,
+                        userId: responseJson[i].userId,
+                        imdbID: responseJson[i].imdbId,
+                        Title: responseJson[i].title,
+                        Poster: responseJson[i].poster,
+                        eventdate: responseJson[i].eventdate
+                    }
+                    watchlist = [...watchlist, element]
+                }
                 watchlist.sort((a, b) => ((new Date(a.eventdate!)) > (new Date(b.eventdate!)) ? 1 : -1))
+                const finalList: Array<MovieCardContent> = []
+                
                 setWatchlistMovieCards(watchlist);
             }
         }

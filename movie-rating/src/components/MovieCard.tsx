@@ -25,7 +25,7 @@ export const MovieCard = (props: MovieCardProps) => {
             </div>
             <div 
                 className="overlay d-flex align-items-center justify-content-center"
-                onClick={ isAuthenticated ? () => (props.watchlistClickHandler(props.movie)) : () => 0}
+                onClick={() => (props.watchlistClickHandler(props.movie))}
             >
                 <WatchlistComponent text={isAuthenticated ? "Add to Watchlist": "Log In to Add"}/>
             </div>

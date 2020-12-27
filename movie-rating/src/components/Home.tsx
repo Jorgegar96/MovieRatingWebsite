@@ -11,7 +11,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 
 export const Home = () => {
 
-    const { user, isAuthenticated } = useAuth0();
+    const { user, isAuthenticated, loginWithRedirect } = useAuth0();
     
     let defaultMovieCards: Array<MovieCardContent> = []
     const [popularMovieCards, setPopularMovieCards]: [Array<MovieCardContent>, (movieCards:Array<MovieCardContent>) => void] = React.useState(
@@ -135,9 +135,9 @@ export const Home = () => {
     <div>
         <Carousel/>
         <h3 className="mx-5 text-white mt-3">Popular Films</h3>
-        <ScrollableCardList movies={popularMovieCards} watchlist={AddWatchlist} watchlistClickHandler={addToWatchlist}/>
+        <ScrollableCardList movies={popularMovieCards} watchlist={AddWatchlist} watchlistClickHandler={isAuthenticated ? addToWatchlist : loginWithRedirect}/>
         <SearchBox searchValue={searchValue} setSearchValue={setSearchValue}/>
-        <ScrollableCardList movies={searchMovieCards} watchlist={AddWatchlist} watchlistClickHandler={addToWatchlist}/>
+        <ScrollableCardList movies={searchMovieCards} watchlist={AddWatchlist} watchlistClickHandler={isAuthenticated ? addToWatchlist : loginWithRedirect}/>
         <h3 className="mx-5 text-white mt-3">Watchlist</h3>
         <ScrollableCardList movies={watchlistMovieCards} watchlist={RemoveWatchlist} watchlistClickHandler={removeFromWatchlist}/>
     </div>

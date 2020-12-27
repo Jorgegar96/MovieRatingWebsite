@@ -10,8 +10,8 @@ export const CommentSection = (props: CommentSectionProps) => {
     return (
         <div>
 
-            <WriteComment idmbID={props.idmbID}/>
-            <CommentsList idmbID={props.idmbID}/>
+            <WriteComment imdbID={props.idmbID}/>
+            <CommentsList imdbID={props.idmbID}/>
         </div>
     )
 }

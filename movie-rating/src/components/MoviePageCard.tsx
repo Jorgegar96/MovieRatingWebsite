@@ -13,7 +13,7 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
 
     const defaultReaction: Reaction = {
         id: "None",
-        idmbId: "None",
+        imdbId: "None",
         userId: "None",
         reaction1: "None",
         eventdate: "None",
@@ -31,11 +31,11 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
         0
     )
 
-    const sendReactionToApi = async (liked: boolean, idmbID: string) => {
+    const sendReactionToApi = async (liked: boolean, imdbID: string) => {
         const dateinfo = new Date();
         console.log(likes)
         const reaction: Reaction = {
-            idmbId: idmbID,
+            imdbId: imdbID,
             userId: user.sub,
             eventdate: dateinfo.toString(),
             reaction1: "None",
@@ -45,7 +45,7 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
         }else{
             reaction.reaction1 = "Disliked";
         }
-        let api_url = `https://localhost:44361/api/Reactions`;
+        let api_url = `${process.env.REACT_APP_BACKEND_SERVER_URL}Reactions`;
         let requestOptions;
         if(userReaction.id === "None"){
             requestOptions = {
@@ -56,7 +56,7 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
             let response = await fetch(api_url, requestOptions);
             let responseJson = await response.json();
             if(responseJson){
-                getMovieReactions(idmbID);
+                getMovieReactions(imdbID);
             }
         } else if(userReaction.reaction1 !== reaction.reaction1){
             api_url = api_url.concat(`/${userReaction.id}`);
@@ -68,7 +68,7 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
             };
             await fetch(api_url, requestOptions)
                 .then(() => {
-                    getMovieReactions(idmbID);
+                    getMovieReactions(imdbID);
                 });
         } else {
             api_url = api_url.concat(`/${userReaction.id}`);
@@ -80,7 +80,7 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
             };
             await fetch(api_url, requestOptions)
                 .then(() => {
-                    getMovieReactions(idmbID);
+                    getMovieReactions(imdbID);
                     setUserReaction(defaultReaction);
                 });
         }
@@ -89,7 +89,7 @@ export const MoviePageCard = (props: MoviePageCardProps) => {
     }
 
     const getMovieReactions = async (idmbID: string) => {
-        const api_url = `https://localhost:44361/api/Reactions?idmbID=${idmbID}`;
+        const api_url = `${process.env.REACT_APP_BACKEND_SERVER_URL}Reactions?idmbID=${idmbID}`;
         const response = await fetch(api_url);
         const responseJson = await response.json();
         console.log(responseJson);

@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { Comment } from '../types/types.d';
 import { useAuth0 } from '@auth0/auth0-react'
-import { deflateSync } from 'zlib';
 
 type WriteCommentProps = {
-    idmbID: string
+    imdbID: string
 }
 
 export const WriteComment = (props: WriteCommentProps) => {
@@ -15,17 +14,17 @@ export const WriteComment = (props: WriteCommentProps) => {
         ""
     );
 
-    const sendCommentToApi = async (idmbID: string, text: string) => {
+    const sendCommentToApi = async (imdbID: string, text: string) => {
         const dateinfo = new Date();
         const comment: Comment = {
             comment1: text,
             userId: user.sub,
-            idmbId: idmbID,
+            imdbId: imdbID,
             username: user.name,
             eventdate: dateinfo.toString()
         }
 
-        const api_url = `https://localhost:44361/api/Comments`;
+        const api_url = `${process.env.REACT_APP_BACKEND_SERVER_URL}Comments`;
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -60,7 +59,7 @@ export const WriteComment = (props: WriteCommentProps) => {
                     </textarea>
                 </div>
                 <div className="row d-flex justify-content-end">
-                    <button className="btn bg-dark text-light mr-5 mt-2" onClick={() => sendCommentToApi(props.idmbID, ctext)}>
+                    <button className="btn bg-dark text-light mr-5 mt-2" onClick={() => sendCommentToApi(props.imdbID, ctext)}>
                         Post Comment
                     </button>
                     <div className='col-md-2'></div>

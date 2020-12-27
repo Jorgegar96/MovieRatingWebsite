@@ -66,7 +66,7 @@ export const Home = () => {
                     eventdate: (new Date()).toString()
                 }
                 console.log(JSON.stringify(watchlistMovie))
-                const api_url = `https://localhost:44361/api/Watchlists`;
+                const api_url = `${process.env.REACT_APP_BACKEND_SERVER_URL}Watchlists`;
                 const requestOptions = {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
@@ -87,7 +87,7 @@ export const Home = () => {
     const removeFromWatchlist = async (movie:MovieCardContent) => {
         if(isAuthenticated){
 
-            const api_url = `https://localhost:44361/api/Watchlists/${movie.id}`;
+            const api_url = `${process.env.REACT_APP_BACKEND_SERVER_URL}Watchlists/${movie.id}`;
             const requestOptions = {
                 method: 'DELETE',
                 headers: {},
@@ -105,7 +105,7 @@ export const Home = () => {
 
     const getWatchlistMovies = async () => {
         if(isAuthenticated){
-            const api_url = `https://localhost:44361/api/Watchlists?userId=${user.sub}`;
+            const api_url = `${process.env.REACT_APP_BACKEND_SERVER_URL}Watchlists?userID=${user.sub}`;
             const response = await fetch(api_url);
             const responseJson = await response.json();
             console.log(responseJson)

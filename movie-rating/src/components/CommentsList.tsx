@@ -3,46 +3,21 @@ import { Comment } from '../types/types.d'
 import { useAuth0 } from '@auth0/auth0-react'
 
 type CommentsListProps = {
-    idmbID: string
+    imdbID: string
 }
 
 export const CommentsList = (props: CommentsListProps) => {
 
     const { user, isAuthenticated } = useAuth0();
 
-    let defaultCommentList: Array<Comment> = [
-        {
-            id: "000",
-            comment1: "The movie was pretty good.",
-            userId: "001",
-            idmbId: "001",
-            username: "Messi",
-            eventdate: "19:12:06 GMT-0500 (Eastern Standard Time)"
-        },
-        {
-            id: "001",
-            comment1: "Really like it towards the end.",
-            userId: "002",
-            idmbId: "001",
-            username: "Alex",
-            eventdate: "19:19:06 GMT-0500 (Eastern Standard Time)"
-        },
-        {
-            id: "002",
-            comment1: "The movie was pretty good.",
-            userId: "003",
-            idmbId: "001",
-            username: "Andres",
-            eventdate: "20:12:06 GMT-0500 (Eastern Standard Time)"
-        }
-    ]
+    let defaultCommentList: Array<Comment> = []
 
     const [commentsList, setCommentsList]: [Array<Comment>, (commentsList: Array<Comment>) => void] = React.useState(
         defaultCommentList
     ) 
 
-    const getComments = async (idmbID: string) => {
-            const api_url = `https://localhost:44361/api/Comments?idmbID=${idmbID}`;
+    const getComments = async (imdbID: string) => {
+            const api_url = `${process.env.REACT_APP_BACKEND_SERVER_URL}Comments?imdbID=${imdbID}`;
             const response = await fetch(api_url);
             const responseJson = await response.json();
             if(responseJson){
@@ -53,7 +28,7 @@ export const CommentsList = (props: CommentsListProps) => {
     }
 
     const deleteComment = async (id: string) => {
-        const api_url = `https://localhost:44361/api/Comments/${id}`
+        const api_url = `${process.env.REACT_APP_BACKEND_SERVER_URL}Comments/${id}`
         const requestOptions = {
             method: 'DELETE',
             headers: {},
@@ -70,7 +45,7 @@ export const CommentsList = (props: CommentsListProps) => {
     }
 
     React.useEffect(() => {
-        getComments(props.idmbID);
+        getComments(props.imdbID);
     }, [])
 
     return (

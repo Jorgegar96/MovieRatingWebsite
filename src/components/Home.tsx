@@ -27,7 +27,7 @@ export const Home = () => {
     const [searchValue, setSearchValue]: [string, (searchValue: string) => void] = React.useState('');
 
     const getMoviesRequest = async (searchValue: string, setMovieCards: (movieCards:Array<MovieCardContent>) => void) => {
-        const api_url = `http://www.omdbapi.com/?s=${searchValue}&apikey=c4ca4c7d`;
+        const api_url = `https://www.omdbapi.com/?s=${searchValue}&apikey=c4ca4c7d`;
         const response = await fetch(api_url);
         const responseJson = await response.json()
 

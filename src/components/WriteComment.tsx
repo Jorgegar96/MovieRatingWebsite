@@ -59,7 +59,10 @@ export const WriteComment = (props: WriteCommentProps) => {
                     </textarea>
                 </div>
                 <div className="row d-flex justify-content-end">
-                    <button className="btn bg-dark text-light mr-5 mt-2" onClick={() => sendCommentToApi(props.imdbID, ctext)}>
+                    <button 
+                        className="btn bg-dark text-light mr-5 mt-2" onClick={() => sendCommentToApi(props.imdbID, ctext)}
+                        disabled={!isAuthenticated}    
+                    >
                         Post Comment
                     </button>
                     <div className='col-md-2'></div>
